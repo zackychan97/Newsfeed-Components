@@ -90,6 +90,10 @@ const data = [
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
+
+
+
+
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -112,3 +116,37 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const articleCreate = (data) => {
+  const articles = document.querySelector('.articles');
+
+//Making a div (article)
+const createdArticle = document.createElement('div');
+//adding article class name to div
+createdArticle.classList.add('article');
+
+
+//Making a h2 (title) and add it to article
+const title = document.createElement('h2');
+//text content
+title.textContent = data.title;
+//append title to article
+createdArticle.appendChild(title);
+
+
+//create the date from array add to the article 
+const date = document.createElement('p');
+//adding class name to p
+date.classList.add('date');
+//adding text content
+date.textContent = data.date;
+//appen date to article
+createdArticle.appendChild(date);
+
+for(const item of ['first', 'second', 'third']){
+  const content = document.createElement('p');
+  content.textContent = data[`${item}Paragraph`];
+  createdArticle.appendChild(content);
+}
+
+}

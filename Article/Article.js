@@ -117,36 +117,52 @@ const data = [
 
 */
 
-const articleCreate = (data) => {
-  const articles = document.querySelector('.articles');
 
-//Making a div (article)
-const createdArticle = document.createElement('div');
-//adding article class name to div
-createdArticle.classList.add('article');
+  const article = document.querySelector('.articles');
 
+  data.forEach(data => {
+    article.appendChild(createdArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph));
+  });
 
-//Making a h2 (title) and add it to article
-const title = document.createElement('h2');
-//text content
-title.textContent = data.title;
-//append title to article
-createdArticle.appendChild(title);
+  function createdArticle (title, date, firstParagraph, secondParagraph, thirdParagraph) {
+    const article = document.createElement("div"); 
+    const articleSection = document.createElement("div");
+    const articleTitle = document.createElement("h2");
+    const articleDate = document.createElement("p");
+    const buttonExpand = document.createElement("span");
+    const container = document.createElement("div");
+    const paraOne = document.createElement("p"); 
+    const paraTwo = document.createElement("p");
+    const paraThree = document.createElement("p"); 
 
+//appending
+article.appendChild(articleSection);
+articleSection.appendChild(articleTitle);
+articleSection.appendChild(articleDate);
+articleSection.appendChild(buttonExpand);
+articleSection.appendChild(container);
+container.appendChild(paraOne);
+container.appendChild(paraTwo);
+container.appendChild(paraThree);
 
-//create the date from array add to the article 
-const date = document.createElement('p');
-//adding class name to p
-date.classList.add('date');
-//adding text content
-date.textContent = data.date;
-//appen date to article
-createdArticle.appendChild(date);
+//adding classes
+article.classList.add('article');
+articleSection.classList.add('article-open');
+container.classList.add('para-container');
+buttonExpand.classList.add('expandButton');
 
-for(const item of ['first', 'second', 'third']){
-  const content = document.createElement('p');
-  content.textContent = data[`${item}Paragraph`];
-  createdArticle.appendChild(content);
-}
+const expand = '\u2b9f \u2b9f \u2b9f';
+//text-content
+articleTitle.textContent= title;
+articleDate.textContent = date;
+paraOne.textContent = firstParagraph;
+paraTwo.textContent = secondParagraph;
+paraThree.textContent = thirdParagraph;
+buttonExpand.textContent = expand;
 
-}
+  buttonExpand.addEventListener('click', () =>{
+    article.classList.toggle('toggle-on');
+    container.classList.toggle('para-container-open');
+  })
+  return article
+  }

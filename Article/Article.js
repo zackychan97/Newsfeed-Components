@@ -90,6 +90,10 @@ const data = [
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
+
+
+
+
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -112,3 +116,123 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+
+//
+const createNewArticle = (data) => {
+  const articles = document.querySelector('.articles');
+
+  // Create a newArticle
+  const newArticle = document.createElement('div');
+  newArticle.classList.add('article');
+
+  // Create Title add to Article
+  const title = document.createElement('h2');
+  title.textContent = data.title;
+  newArticle.appendChild(title);
+
+  // Create Date add to Article
+  const date = document.createElement('p');
+  date.classList.add('date');
+  date.textContent = data.date;
+  newArticle.appendChild(date);
+
+  for(const item of ['first', 'second', 'third']){
+    const content = document.createElement('p');
+    content.textContent = data[`${item}Paragraph`];
+    newArticle.appendChild(content);
+
+
+  }
+  
+  // button expands content
+  const button = document.createElement('span');
+  button.textContent = 'Open'
+  button.classList.add('expandButton');
+  button.addEventListener('click', (e) => {
+    newArticle.classList.toggle('article-open');
+    if(button.textContent === 'Open'){
+      button.textContent = 'Close'
+    } else if (button.textContent === 'Close'){
+      button.textContent = 'Open';
+    }
+    
+  })
+
+  newArticle.appendChild(button);
+
+  // Add newArticle articles
+  articles.appendChild(newArticle);
+  return newArticle;
+}
+
+const articles = data.map(article => createNewArticle(article));
+
+const [ articleContainer ] = document.getElementsByClassName('articles');
+
+articles.forEach(article => {
+  articleContainer.appendChild(article);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
